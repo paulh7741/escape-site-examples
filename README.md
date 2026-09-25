@@ -4,9 +4,15 @@ Design prototypes for [escapehairdressing.co.uk](https://escapehairdressing.co.u
 
 | Page | What it is |
 |---|---|
-| `index.html` | Review of the current site, plus three homepage directions (A Neighbourhood, B Studio, C Book-first) with a desktop/phone toggle |
-| `admin.html` | Demo of the price editor: change a price, click Save, and every page updates |
+| `index.html` | Start here: the three designs and the price editor |
+| `design-1.html` | Classic Rose: warm, with a big photo header and before-and-afters |
+| `design-2.html` | Modern Studio: dark and elegant, led by photos |
+| `design-3.html` | Quick Book: pick a service, see the price and book at the top of the page |
+| `admin.html` | Demo price editor: change a price, Save, and every design updates |
 | `prices.js` | The single price list every page reads from |
+| `common.js`, `base.css` | Shared hours, open-now status, price list and layout |
+
+Salon photos are loaded from escapehairdressing.co.uk; interior and styling photos are from Unsplash.
 
 ## Updating prices
 
