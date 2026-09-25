@@ -11,15 +11,22 @@
   function fmt(v) { var h = Math.floor(v), m = Math.round((v - h) * 60), ap = h >= 12 ? "pm" : "am"; return ((h + 11) % 12 + 1) + (m ? "." + String(m).padStart(2, "0") : "") + ap; }
   function range(r) { return r ? fmt(r[0]) + " – " + fmt(r[1]) : "Closed"; }
 
-  // ---- design switcher strip ----
+  // ---- prototype strip ----
   var strip = document.querySelector("[data-proto]");
   if (strip) {
-    var cur = strip.getAttribute("data-proto");
-    var names = { "1": "Classic Rose", "2": "Modern Studio", "3": "Quick Book" };
-    strip.innerHTML = '<span class="ps-l">Prototype · not the live site</span><nav>' +
-      ["1", "2", "3"].map(function (n) { return '<a href="design-' + n + '.html"' + (n === cur ? ' aria-current="page"' : "") + ">" + n + " · " + names[n] + "</a>"; }).join("") +
-      '<a href="admin.html">Price editor</a></nav><a class="ps-r" href="index.html">All designs</a>';
+    strip.innerHTML = "<span>Prototype · not the live site</span>";
   }
+
+  // ---- photos (from photos.js) ----
+  var PHOTOS = {};
+  ((window.ESCAPE_PHOTOS || {}).sections || []).forEach(function (sec) { sec.slots.forEach(function (s) { PHOTOS[s.id] = s; }); });
+  document.querySelectorAll("img[data-photo]").forEach(function (img) {
+    var s = PHOTOS[img.dataset.photo]; if (!s) return;
+    if (img.getAttribute("src") !== s.src) img.src = s.src;
+    img.alt = s.alt || "";
+  });
+  document.querySelectorAll("[data-photo-title]").forEach(function (el) { var s = PHOTOS[el.dataset.photoTitle]; if (s && s.title != null) el.textContent = s.title; });
+  document.querySelectorAll("[data-photo-detail]").forEach(function (el) { var s = PHOTOS[el.dataset.photoDetail]; if (s && s.detail != null) el.textContent = s.detail; });
 
   // ---- hours + open now (Edinburgh time) ----
   var dayIdx = 0, now = 0;

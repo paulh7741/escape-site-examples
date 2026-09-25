@@ -15,7 +15,7 @@ section{scroll-margin-top:90px}
 .proto-strip a{color:#e9e2e4;text-decoration:none;padding:4px 10px;border-radius:999px}
 .proto-strip a[aria-current]{background:#e9e2e4;color:#141012}
 .proto-strip .ps-l{opacity:.7}
-@media (max-width:640px){.proto-strip .ps-l,.proto-strip .ps-r{display:none}.proto-strip{justify-content:center}}
+@media (max-width:640px){.proto-strip{justify-content:center;text-align:center}}
 
 /* price list */
 .pl-levels{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}

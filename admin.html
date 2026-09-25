@@ -4,55 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Escape Price Editor</title>
+<title>Escape Admin</title>
 <script src="prices.js"></script>
+<script src="photos.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Cormorant+Garamond:wght@600&display=swap">
 <style>
 :root{
   color-scheme:light;
-  --bg:#f5f3f3; --surface:#ffffff; --ink:#221c1e; --muted:#6c6266; --line:#e2d9db; --field:#fbfafa;
-  --accent:#8a4f58; --accent-ink:#ffffff; --soft:#f3e7e8; --ok:#2f7a4f; --ok-bg:#e6f2ea; --bad:#b3261e; --bad-bg:#fbe9e7;
-  --f:"Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    color-scheme:dark;
-    --bg:#161213; --surface:#211b1d; --ink:#f1eaeb; --muted:#b0a3a7; --line:#3a3033; --field:#1a1516;
-    --accent:#d7959d; --accent-ink:#1b1214; --soft:#2d2225; --ok:#93cfa3; --ok-bg:#1c2e21; --bad:#ff9d92; --bad-bg:#3a1f1c;
-  }
-}
-:root[data-theme="dark"]{
-  color-scheme:dark;
-  --bg:#161213; --surface:#211b1d; --ink:#f1eaeb; --muted:#b0a3a7; --line:#3a3033; --field:#1a1516;
-  --accent:#d7959d; --accent-ink:#1b1214; --soft:#2d2225; --ok:#93cfa3; --ok-bg:#1c2e21; --bad:#ff9d92; --bad-bg:#3a1f1c;
+  --bg:#f7f2f0; --surface:#ffffff; --ink:#2a2124; --muted:#6e5f63; --line:#ecdfdb; --field:#fcf9f8;
+  --accent:#96585e; --accent-ink:#ffffff; --soft:#f5e7e3; --ok:#2f7a4f; --ok-bg:#e6f2ea; --bad:#b3261e; --bad-bg:#fbe9e7;
+  --f:"Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--f);padding-inline:16px;padding-block:0 110px}
-.wrap{max-width:900px;margin-inline:auto}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.5 var(--f);padding-inline:16px;padding-block:0 110px}
+.wrap{max-width:960px;margin-inline:auto}
 a{color:var(--accent)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.demo{background:var(--ink);color:var(--bg);font-size:13px;text-align:center;padding:8px 16px;margin-inline:-16px}
-header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px;padding-block:28px 18px}
-h1{margin:0;font-size:28px;letter-spacing:-.01em}
-header p{margin:4px 0 0;color:var(--muted)}
-.view{font-weight:600;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 14px;border-radius:999px}
+.demo{background:#2a1f23;color:#f4ebe8;font-size:13px;text-align:center;padding:8px 16px;margin-inline:-16px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-block:26px 8px}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand b{font:600 30px/1 "Cormorant Garamond",Georgia,serif}
+.brand span{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.view{font-weight:600;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:9px 16px;border-radius:999px}
+.tabs{display:flex;gap:6px;margin:18px 0 22px;border-bottom:1px solid var(--line)}
+.tabs button{font:600 16px var(--f);background:none;border:0;border-bottom:3px solid transparent;color:var(--muted);padding:10px 16px;cursor:pointer;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.intro{color:var(--muted);margin:0 0 18px;max-width:70ch}
+.btn{font:600 15px var(--f);border-radius:999px;padding:10px 18px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:default}
 
-.tool{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:18px}
-.tool b{margin-right:4px}
+/* ---------- prices ---------- */
+.tool{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:18px}
 .tool input,.tool select{font:500 15px var(--f);color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:8px;padding:7px 9px}
 .tool input{width:72px}
 .tool .hint{color:var(--muted);font-size:13px;flex-basis:100%}
-
-.cat{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:16px;overflow:hidden}
+.cat{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:16px;overflow:hidden}
 .cat h2{margin:0;font-size:17px;padding:14px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
 .cat h2 small{font-weight:500;font-size:13px;color:var(--muted)}
 .grid{display:grid;grid-template-columns:minmax(160px,1fr) repeat(3,92px) 56px 36px;gap:8px;align-items:center;padding:8px 16px}
 .head{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:12px;padding-bottom:0}
 .head span:nth-child(n+2){text-align:center}
 .row{border-bottom:1px solid var(--line)}
-.row:last-of-type{border-bottom:0}
 .row input[type=text],.row input[type=number]{font:500 15px var(--f);color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:8px;padding:8px 9px;width:100%;min-width:0}
 .money{position:relative}
 .money::before{content:"£";position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
@@ -66,16 +61,38 @@ header p{margin:4px 0 0;color:var(--muted)}
 .del:hover{color:var(--bad);background:var(--bad-bg)}
 .add{margin:6px 16px 14px;font:600 14px var(--f);color:var(--accent);background:transparent;border:1px dashed var(--accent);border-radius:8px;padding:8px 12px;cursor:pointer}
 .lbl{display:none}
-
 .bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));z-index:5}
-.bar .in{max-width:900px;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.bar .in{max-width:960px;margin-inline:auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
 .status{flex:1;min-width:180px;font-size:14px;color:var(--muted)}
 .status.dirty{color:var(--accent);font-weight:600}
 .status.ok{color:var(--ok);font-weight:600}
 .status.bad{color:var(--bad);font-weight:600}
-.btn{font:600 15px var(--f);border-radius:999px;padding:10px 18px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none}
-.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.btn:disabled{opacity:.45;cursor:default}
+
+/* ---------- photos ---------- */
+.psec{margin-bottom:30px}
+.psec h2{font-size:17px;margin:0 0 12px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.slot{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s ease,border-color .2s ease}
+.slot.wide{grid-column:span 2}
+.slot.drag{border-color:var(--accent);box-shadow:0 0 0 3px var(--soft)}
+.slot .pic{position:relative;aspect-ratio:4/3;background:var(--soft)}
+.slot.wide .pic{aspect-ratio:16/7}
+.slot .pic img{width:100%;height:100%;object-fit:cover;display:block}
+.slot .badge{position:absolute;top:10px;left:10px;background:var(--ok-bg);color:var(--ok);font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px}
+.slot .body{padding:12px 14px 14px;display:grid;gap:8px}
+.slot .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.slot .top b{font-size:15px}
+.slot label.f{display:grid;gap:3px;font-size:12px;color:var(--muted);font-weight:500}
+.slot input[type=text]{font:500 14px var(--f);color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:8px;padding:7px 9px;width:100%;min-width:0}
+.slot .acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.upload{position:relative;overflow:hidden}
+.upload input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0}
+.restore{font:500 13px var(--f);background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:4px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-weight:500;font-size:14.5px;transition:all .25s ease;z-index:9;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast.err{background:var(--bad)}
+.tips{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 18px;margin-bottom:22px;font-size:14.5px;color:var(--muted)}
+.tips b{color:var(--ink)}
 
 @media (max-width:640px){
   .grid.head{display:none}
@@ -85,47 +102,75 @@ header p{margin:4px 0 0;color:var(--muted)}
   .row .del{grid-column:3;justify-self:end}
   .lbl{display:block;font-size:11px;color:var(--muted);margin-bottom:2px}
   .from .lbl{display:inline;margin:0;font-size:14px}
+  .slot.wide{grid-column:auto}
+  .slot.wide .pic{aspect-ratio:4/3}
 }
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<div class="demo">Demo of the price editor. Changes are saved only in your browser and don't affect the real salon website.</div>
+<div class="demo">Admin demo. Changes are saved only in this browser and don't affect the real salon website.</div>
 <div class="wrap">
   <header>
-    <div>
-      <h1>Prices</h1>
-      <p>Change a number, then Save. The homepage, price list and booking picker all update. Leave a box empty if that level doesn't offer the service.</p>
-    </div>
-    <a class="view" href="index.html">All designs</a> <a class="view" href="design-1.html">View the site →</a>
+    <div class="brand"><b>escape</b><span>Admin</span></div>
+    <a class="view" href="index.html" target="_blank" rel="noopener">View website ↗</a>
   </header>
 
-  <div class="tool">
-    <b>Raise all prices by</b>
-    <input type="number" id="raise-amt" value="2" min="0" step="1" aria-label="Amount">
-    <select id="raise-unit" aria-label="Unit"><option value="gbp">£</option><option value="pct">%</option></select>
-    <select id="raise-cat" aria-label="Which services"></select>
-    <button class="btn" type="button" id="raise-go">Apply</button>
-    <span class="hint">Percentage rises are rounded to the nearest whole pound. Nothing is saved until you click Save.</span>
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tab-prices" aria-controls="p-prices" aria-selected="true">Prices</button>
+    <button role="tab" id="tab-photos" aria-controls="p-photos" aria-selected="false">Photos</button>
   </div>
 
-  <div id="cats"></div>
+  <!-- ================= PRICES ================= -->
+  <section id="p-prices" role="tabpanel" aria-labelledby="tab-prices">
+    <p class="intro">Change a number, then click Save. The price list and the "from £" prices on the website update. Leave a box empty if that level doesn't offer the service.</p>
+    <div class="tool">
+      <b>Raise all prices by</b>
+      <input type="number" id="raise-amt" value="2" min="0" step="1" aria-label="Amount">
+      <select id="raise-unit" aria-label="Unit"><option value="gbp">£</option><option value="pct">%</option></select>
+      <select id="raise-cat" aria-label="Which services"></select>
+      <button class="btn" type="button" id="raise-go">Apply</button>
+      <span class="hint">Percentage rises are rounded to the nearest whole pound. Nothing is saved until you click Save.</span>
+    </div>
+    <div id="cats"></div>
+  </section>
+
+  <!-- ================= PHOTOS ================= -->
+  <section id="p-photos" role="tabpanel" aria-labelledby="tab-photos" hidden>
+    <p class="intro">Every photo on the website has a spot below. Click <b>Replace photo</b> (or drag a picture onto it) and the website updates straight away. There's no Save button for photos.</p>
+    <div class="tips"><b>Tips:</b> Photos taken in good daylight look best. Before &amp; after pictures work well side by side in one square image. Large photos are shrunk automatically.</div>
+    <div id="photos"></div>
+  </section>
 </div>
 
-<div class="bar"><div class="in">
+<div class="bar" id="pricebar"><div class="in">
   <span class="status" id="status" role="status">No unsaved changes</span>
   <button class="btn" type="button" id="reset">Reset to salon's prices</button>
   <button class="btn primary" type="button" id="save">Save prices</button>
 </div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function(){
-  const clone=o=>JSON.parse(JSON.stringify(o));
-  const ORIGINAL=window.ESCAPE_PRICES_ORIGINAL||window.ESCAPE_PRICES;
-  let saved=clone(window.ESCAPE_PRICES);
-  let data=clone(saved);
-  let showSavedMsg=false;
   const $=s=>document.querySelector(s);
-  const esc=s=>String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  const esc=s=>String(s==null?'':s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  const clone=o=>JSON.parse(JSON.stringify(o));
+  let toastT;
+  function toast(msg,err){const t=$('#toast');t.textContent=msg;t.classList.toggle('err',!!err);t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),2800);}
+
+  // ---------- tabs ----------
+  const tabs=[...document.querySelectorAll('.tabs button')];
+  function showTab(id){
+    tabs.forEach(t=>{const on=t.getAttribute('aria-controls')===id;t.setAttribute('aria-selected',on);document.getElementById(t.getAttribute('aria-controls')).hidden=!on;});
+    $('#pricebar').hidden=id!=='p-prices';
+    document.body.style.paddingBottom=id==='p-prices'?'':'40px';
+  }
+  tabs.forEach(t=>t.addEventListener('click',()=>{showTab(t.getAttribute('aria-controls'));try{history.replaceState(null,'','#'+t.id.slice(4))}catch(e){}}));
+  if(location.hash==='#photos') showTab('p-photos');
+
+  // =================== PRICES ===================
+  const ORIGINAL=window.ESCAPE_PRICES_ORIGINAL||window.ESCAPE_PRICES;
+  let saved=clone(window.ESCAPE_PRICES), data=clone(saved), showSavedMsg=false;
 
   function priceCell(ci,ii,li,v,before){
     const changed=before!==undefined&&before!==v;
@@ -133,10 +178,10 @@ header p{margin:4px 0 0;color:var(--muted)}
   }
   function draw(){
     $('#cats').innerHTML=data.categories.map((c,ci)=>{
-      const savedCat=(saved.categories[ci]||{items:[]});
+      const sc=(saved.categories[ci]||{items:[]});
       return `<section class="cat"><h2>${esc(c.name)}<small>${c.booking==='phone'?'Call to book':'Book online'}</small></h2>
       <div class="grid head"><span>Service</span>${data.levels.map(l=>`<span>${esc(l)}</span>`).join('')}<span>"From"</span><span></span></div>
-      ${c.items.map((it,ii)=>{const s=(savedCat.items[ii]||{prices:[]});return `<div class="row grid">
+      ${c.items.map((it,ii)=>{const s=(sc.items[ii]||{prices:[]});return `<div class="row grid">
         <input class="name" type="text" id="n-${ci}-${ii}" data-ci="${ci}" data-ii="${ii}" value="${esc(it.name)}" aria-label="Service name">
         ${it.prices.map((v,li)=>priceCell(ci,ii,li,v,s.prices[li])).join('')}
         <label class="from"><input type="checkbox" id="f-${ci}-${ii}" data-ci="${ci}" data-ii="${ii}" ${it.from?'checked':''} aria-label="Show as from price"><span class="lbl">Show as "from"</span></label>
@@ -153,20 +198,18 @@ header p{margin:4px 0 0;color:var(--muted)}
     $('#save').disabled=!dirty||bad>0;
     if(bad){st.className='status bad';st.textContent='Fix the highlighted price'+(bad>1?'s':'')+' before saving';}
     else if(dirty){st.className='status dirty';st.textContent='Unsaved changes';showSavedMsg=false;}
-    else if(showSavedMsg){st.className='status ok';st.textContent='Saved. The site now shows these prices.';}
+    else if(showSavedMsg){st.className='status ok';st.textContent='Saved. The website now shows these prices.';}
     else{st.className='status';st.textContent='No unsaved changes';}
   }
-
   $('#cats').addEventListener('input',e=>{
-    const t=e.target,ci=+t.dataset.ci,ii=+t.dataset.ii,it=data.categories[ci]?.items[ii]; if(!it) return;
+    const t=e.target,ci=+t.dataset.ci,ii=+t.dataset.ii,it=data.categories[ci]&&data.categories[ci].items[ii]; if(!it) return;
     if(t.classList.contains('name')) it.name=t.value;
     else if(t.type==='checkbox') it.from=t.checked;
     else if(t.type==='number'){
-      const li=+t.dataset.li,v=t.value.trim();
-      const ok=v===''||(!isNaN(+v)&&+v>=0);
+      const li=+t.dataset.li,v=t.value.trim(),ok=v===''||(!isNaN(+v)&&+v>=0);
       t.classList.toggle('invalid',!ok);
       if(ok){it.prices[li]=v===''?null:Math.round(+v*100)/100;
-        const s=saved.categories[ci]?.items[ii]?.prices[li];t.classList.toggle('changed',s!==it.prices[li]);}
+        const s=saved.categories[ci]&&saved.categories[ci].items[ii]&&saved.categories[ci].items[ii].prices[li];t.classList.toggle('changed',s!==it.prices[li]);}
     }
     status();
   });
@@ -177,25 +220,17 @@ header p{margin:4px 0 0;color:var(--muted)}
     if(t.classList.contains('add')){const ci=+t.dataset.ci;data.categories[ci].items.push({name:'New service',prices:[null,null,null]});draw();
       const n=document.getElementById(`n-${ci}-${data.categories[ci].items.length-1}`);if(n){n.focus();n.select();}}
   });
-
   $('#raise-go').addEventListener('click',()=>{
-    const amt=+$('#raise-amt').value||0,unit=$('#raise-unit').value,which=$('#raise-cat').value;
-    if(!amt) return;
-    data.categories.forEach((c,ci)=>{
-      if(which!=='all'&&+which!==ci) return;
-      c.items.forEach(it=>{it.prices=it.prices.map(v=>typeof v!=='number'?v:(unit==='gbp'?v+amt:Math.round(v*(1+amt/100))));});
-    });
+    const amt=+$('#raise-amt').value||0,unit=$('#raise-unit').value,which=$('#raise-cat').value; if(!amt) return;
+    data.categories.forEach((c,ci)=>{ if(which!=='all'&&+which!==ci) return;
+      c.items.forEach(it=>{it.prices=it.prices.map(v=>typeof v!=='number'?v:(unit==='gbp'?v+amt:Math.round(v*(1+amt/100))));});});
     draw();
   });
-
   $('#save').addEventListener('click',()=>{
     data.updated=new Date().toISOString().slice(0,10);
-    try{localStorage.setItem('escape-prices',JSON.stringify(data))}catch(e){
-      $('#status').className='status bad';$('#status').textContent='This browser blocked saving. Try a normal (not private) window.';return;}
+    try{localStorage.setItem('escape-prices',JSON.stringify(data))}catch(e){$('#status').className='status bad';$('#status').textContent='This browser blocked saving. Try a normal (not private) window.';return;}
     saved=clone(data);showSavedMsg=true;draw();
   });
-
-  // two-step reset instead of confirm(), which some viewers block
   let armed=false,timer;
   $('#reset').addEventListener('click',()=>{
     const b=$('#reset');
@@ -205,9 +240,64 @@ header p{margin:4px 0 0;color:var(--muted)}
     data=clone(ORIGINAL);saved=clone(ORIGINAL);showSavedMsg=false;draw();
     $('#status').className='status ok';$('#status').textContent="Back to the salon's current prices.";
   });
-
   window.addEventListener('beforeunload',e=>{if(JSON.stringify(data)!==JSON.stringify(saved)){e.preventDefault();e.returnValue='';}});
   draw();
+
+  // =================== PHOTOS ===================
+  const P=window.ESCAPE_PHOTOS||{sections:[]};
+  const slots={};P.sections.forEach(s=>s.slots.forEach(x=>slots[x.id]=x));
+  let edits={};try{edits=JSON.parse(localStorage.getItem('escape-photos')||'{}')}catch(e){}
+
+  function drawPhotos(){
+    $('#photos').innerHTML=P.sections.map(sec=>`<div class="psec"><h2>${esc(sec.name)}</h2><div class="pgrid">${sec.slots.map(s=>{
+      const e=!!edits[s.id];
+      return `<div class="slot${s.wide?' wide':''}" data-id="${s.id}">
+        <div class="pic"><img src="${esc(s.src)}" alt="${esc(s.alt)}">${e?'<span class="badge">Changed</span>':''}</div>
+        <div class="body">
+          <div class="top"><b>${esc(s.label)}</b>${e?`<button class="restore" type="button" data-restore="${s.id}">Restore original</button>`:''}</div>
+          <div class="acts"><label class="btn primary upload">Replace photo<input type="file" accept="image/*" data-file="${s.id}" aria-label="Replace ${esc(s.label)}"></label></div>
+          <label class="f">Description (for Google &amp; screen readers)<input type="text" id="alt-${s.id}" data-field="alt" data-id="${s.id}" value="${esc(s.alt)}"></label>
+          ${s.title!=null?`<label class="f">Caption<input type="text" id="title-${s.id}" data-field="title" data-id="${s.id}" value="${esc(s.title)}"></label>
+          <label class="f">Detail<input type="text" id="detail-${s.id}" data-field="detail" data-id="${s.id}" value="${esc(s.detail)}"></label>`:''}
+        </div></div>`;}).join('')}</div></div>`).join('');
+  }
+  function persist(){
+    try{localStorage.setItem('escape-photos',JSON.stringify(edits));return true;}
+    catch(e){return false;}
+  }
+  function setEdit(id,patch){
+    const before=edits[id]?clone(edits[id]):undefined;
+    edits[id]=Object.assign({},edits[id]||{},patch);
+    if(!persist()){ if(before) edits[id]=before; else delete edits[id]; toast("Not enough room to save this photo in the demo. Try a smaller one, or restore another photo first.",true); return false; }
+    Object.assign(slots[id],patch); return true;
+  }
+  function shrink(file,max){
+    return new Promise((res,rej)=>{
+      const fr=new FileReader();
+      fr.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.8));};im.onerror=rej;im.src=fr.result;};
+      fr.onerror=rej;fr.readAsDataURL(file);
+    });
+  }
+  async function useFile(id,file){
+    if(!file) return;
+    if(!/^image\//.test(file.type)){toast("That isn't a picture. Choose a JPG or PNG photo.",true);return;}
+    try{
+      const src=await shrink(file,slots[id].wide?1600:900);
+      if(setEdit(id,{src})){drawPhotos();toast('Photo updated. The website now shows it.');}
+    }catch(e){toast("Couldn't read that photo. Try a JPG or PNG (some iPhone photos need exporting as JPG first).",true);}
+  }
+  $('#photos').addEventListener('change',e=>{
+    const t=e.target;
+    if(t.dataset.file){useFile(t.dataset.file,t.files[0]);t.value='';}
+    else if(t.dataset.field){const id=t.dataset.id;if(setEdit(id,{[t.dataset.field]:t.value.trim()})){drawPhotos();toast('Saved.');}}
+  });
+  $('#photos').addEventListener('click',e=>{
+    const id=e.target.dataset.restore; if(!id) return;
+    delete edits[id]; persist(); Object.assign(slots[id],slots[id].original); drawPhotos(); toast('Original photo restored.');
+  });
+  ['dragenter','dragover'].forEach(ev=>$('#photos').addEventListener(ev,e=>{const s=e.target.closest('.slot');if(!s)return;e.preventDefault();s.classList.add('drag');}));
+  ['dragleave','drop'].forEach(ev=>$('#photos').addEventListener(ev,e=>{const s=e.target.closest('.slot');if(!s)return;e.preventDefault();s.classList.remove('drag');if(ev==='drop')useFile(s.dataset.id,e.dataTransfer.files[0]);}));
+  drawPhotos();
 })();
 </script>
 </body>
