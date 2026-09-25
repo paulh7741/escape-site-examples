@@ -12,7 +12,6 @@ Design prototype for [escapehairdressing.co.uk](https://escapehairdressing.co.uk
 | `photos.js` | Every photo on the site, one named slot each |
 | `prices.js` | The single price list the site reads from |
 | `common.js`, `base.css` | Opening hours, open-now status, price list and shared layout |
-| `design-1/2/3.html` | Redirects to `index.html` for older links |
 
 ## Updating prices
 
